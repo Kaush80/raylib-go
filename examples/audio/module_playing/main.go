@@ -1,7 +1,9 @@
 package main
 
 import (
-	"github.com/gen2brain/raylib-go/raylib"
+	"math"
+
+	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 const maxCircles = 64
@@ -76,7 +78,7 @@ func main() {
 		}
 
 		// Get timePlayed scaled to bar dimensions
-		timePlayed := int32(rl.GetMusicTimePlayed(xm)/rl.GetMusicTimeLength(xm)*float32(screenWidth-40)) * 2
+		timePlayed := int32((float32(math.Mod(float64(rl.GetMusicTimePlayed(xm)), float64(rl.GetMusicTimeLength(xm)))) / rl.GetMusicTimeLength(xm)) * float32(screenWidth-40))
 
 		// Color circles animation
 		for i := maxCircles - 1; (i >= 0) && !pause; i-- {
